@@ -7,8 +7,11 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ public class AllReviews extends AppCompatActivity {
     Data data;
     int pos;
     ContentResolver resolver;
+    EditText edt;
 
 
     @Override
@@ -38,6 +42,8 @@ public class AllReviews extends AppCompatActivity {
                 selected();
             }
         });
+        edt=(EditText)findViewById(R.id.edit);
+
         a=new ArrayList<>();
         get();
 
@@ -47,7 +53,7 @@ public class AllReviews extends AppCompatActivity {
 
         resolver=getContentResolver();
 
-        String[] p={"RollNumber","Name","Class","Subject","Teacher","Audio","Clear","Visible","Pace","Rating","Query"};
+        String[] p={"Name","Class","RollNumber","Subject","Teacher","Clear","Visible","Audio","Pace","Query","Rating"};
         Cursor c=resolver.query(Util.u,p,null,null,null);
 
         if(c!=null){
@@ -65,6 +71,22 @@ public class AllReviews extends AppCompatActivity {
             Collections.sort(a, new compare());
             adapter=new MyAdapter(this,R.layout.item,a);
             listView.setAdapter(adapter);
+            edt.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        adapter.filter(charSequence.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
         }
 
     }
