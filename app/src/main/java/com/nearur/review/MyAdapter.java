@@ -80,9 +80,9 @@ public class MyAdapter extends ArrayAdapter<Data> {
 
         if(s!=null) {
 
-            SpannableString string = new SpannableString(t1.getText().toString());
-            string.setSpan(new ForegroundColorSpan(Color.GREEN), t1.getText().toString().toLowerCase().indexOf(s.toLowerCase()),t1.getText().toString().toLowerCase().indexOf(s.toLowerCase())+s.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
-            t1.setText(string);
+            SpannableString stringw = new SpannableString(t1.getText().toString());
+            stringw.setSpan(new ForegroundColorSpan(Color.GREEN), t1.getText().toString().toLowerCase().indexOf(s.toLowerCase()),t1.getText().toString().toLowerCase().indexOf(s.toLowerCase())+s.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+            t1.setText(stringw);
         }
     }
 }
